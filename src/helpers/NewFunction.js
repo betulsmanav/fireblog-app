@@ -79,3 +79,5 @@ export const UpdateCard = (info) => {
   return update(ref(db),updates)
   
 }
+
+

@@ -11,11 +11,15 @@ import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import {  useFetch } from "../helpers/NewFunction";
 import loading from "../assets/loading.gif";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import {AuthContext} from '../contexts/AuthContext'
 
 function BlogCard() {
 
   const { isloading, blogCard } = useFetch();
   const navigate = useNavigate();
+  const { currentUser, handleFavIcon } = useContext(AuthContext);
+
 
   const handleCardClick = (item) => {
     navigate(`details/${item.id}`, {state:{item}});
@@ -67,10 +71,18 @@ function BlogCard() {
             </CardContent>
 
             <CardActions sx={{ borderRadius: "50%" }} className="cardBottom">
-              <FavoriteIcon sx={{ cursor: "pointer", marginRight: "5px" }} />
-              <span style={{ marginRight: "0.5rem" }}></span>
+              <FavoriteIcon
+                 className={
+                  item?.likedUserIds?.includes(currentUser.uid) > 0
+                    ? "active"
+                    : "favBtn"
+                }
+                sx={{ cursor: "pointer", marginRight: "5px" }}
+                onClick={(e) => handleFavIcon(e, item)} />
+              <span style={{ marginRight: "0.5rem" }}>{" "}
+                {item.likedUserIds?.length}</span>
               <ModeCommentOutlinedIcon sx={{ cursor: "pointer" }} />
-              <span> </span>
+              <span> 0</span>
 
               <Typography className="email">{item?.email}</Typography>
             </CardActions>

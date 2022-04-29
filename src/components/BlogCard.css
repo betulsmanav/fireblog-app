@@ -73,3 +73,9 @@ display: flex;
 .sideBar{
     color: blue;
 }
+
+.blogWarning {
+    color: red;
+    font-size: 18px;
+    margin-top: 1rem;
+}

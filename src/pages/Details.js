@@ -6,6 +6,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import "../components/BlogCard.css"
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import { useLocation, useNavigate} from "react-router-dom";
@@ -18,9 +19,9 @@ const Details = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const item = location.state.item;
-  // console.log(item);
+  console.log(item);
  
-  const { currentUser } = useContext(AuthContext)
+  const { currentUser,handleFavIcon} = useContext(AuthContext)
   // console.log(currentUser)
   
   const handleUpdate = () => {
@@ -64,13 +65,20 @@ const Details = () => {
         </CardContent>
 
         <CardActions sx={{ borderRadius: "50%" }} className="cardBottom">
-          <FavoriteIcon sx={{ cursor: "pointer", marginRight: "5px" }} />
-          <span style={{ marginRight: "0.5rem" }}></span>
+          <FavoriteIcon className={
+              item?.likedUserIds?.includes(currentUser.uid) > 0
+                ? "active"
+                : "favBtn"
+            }
+            sx={{ cursor: "pointer", marginRight: "5px" }}
+            onClick={(e) => handleFavIcon(e, item)}/>
+          <span > {item?.likedUserIds?.length}</span>
           <ModeCommentOutlinedIcon sx={{ cursor: "pointer" }} />
-          <span> </span>
+          <span>0 </span>
 
           <Typography className="email">{item.email}</Typography>
         </CardActions>
+        
         {(currentUser?.email === item?.email) ? (
         <div>
             
@@ -82,8 +90,9 @@ const Details = () => {
           </Button>
   
           <Button onClick={() => DeleteCard(item.id, navigate)}>DELETE</Button>
-        </div>): null}
-        
+        </div>): <div className="blogWarning">
+            Only the author of this blog can make changes...
+          </div>}
       </Card>
     </div>
   );
