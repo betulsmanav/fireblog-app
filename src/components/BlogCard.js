@@ -62,7 +62,7 @@ function BlogCard() {
                 color="text.secondary"
                 sx={{ cursor: "pointer", "&:hover": { color: "black" } }}
               >
-                {item?.content}
+                {item?.content.substring(0, 150) + " ..."}
               </Typography>
             </CardContent>
 
