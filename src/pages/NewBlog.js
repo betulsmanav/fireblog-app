@@ -8,7 +8,8 @@ const NewBlog = () => {
   
   
   return (
-    <Grid container textAlign="center" direction="column" style={{ width: "300px" }}>
+    <div style={{display:"flex",justifyContent:"center",marginTop:"3rem"}}>
+      <Grid container textAlign="center" direction="column" style={{ width: "300px" }}>
       <h2 className="contact-header">────New Bolg────</h2>
 
       <Box style={{ backgroundColor: "white", padding: "20px" }}>
@@ -52,6 +53,7 @@ const NewBlog = () => {
         </form>
       </Box>
     </Grid>
+    </div>
   );
 };
 

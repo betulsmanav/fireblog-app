@@ -1,10 +1,10 @@
 import React from "react";
-import BlogForm from "../components/BlogForm";
+import BlogCard from "../components/BlogCard";
 
 const Dashboard = () => {
   return (
     <div>
-      <BlogForm/>
+      <BlogCard/>
     </div>
   );
 };

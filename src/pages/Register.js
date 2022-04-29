@@ -6,9 +6,11 @@ import {
   Stack,
   Box,
 } from "@mui/material";
-import { createUser } from "../helpers/userFunction";
+import { createUser, forgotPassword } from "../helpers/userFunction";
 import {useNavigate } from "react-router-dom";
 import {  signUpProvider } from "../helpers/userFunction";
+import passwordImg from "../assets/forgot-password.png";
+import googleLogo from "../assets/google.png";
 
 
 const Login = () => {
@@ -31,7 +33,8 @@ const Login = () => {
 
 
   return (
-    <Grid
+    <div style={{display:"flex",justifyContent:"center",marginTop:"3rem"}}>
+      <Grid
       textAlign="center"
       style={{ width: "300" }}
     >
@@ -83,15 +86,47 @@ const Login = () => {
             >
               register
             </Button>
-            <Button onClick={handleProviderLogin} variant="outlined" type="submit" value="Submit">
-              Continue with google
-            </Button>
+            <Button
+                onClick={handleProviderLogin}
+                variant="outlined"
+                type="submit"
+                value="Submit"
+                style={{
+                  height: "2.5rem",
+                  
+                }}
+              >
+                WITH{" "}
+                <img
+                  style={{
+                    height: "1rem",
+                    color: "black",
+                    padding: "1rem",
+                    fontWeight: "bold",
+                  }}
+                  src={googleLogo}
+                  alt="google-logo"
+                />
+              </Button>
             
           </Stack>
 
-        </form>
+          </form>
+          <div style={{ fontFamily: "sans-serif", fontSize: "12px" }}>
+            <p>
+            Are you already registered?{" "}
+              <Button onClick={() => navigate("/login")}>Login</Button>
+            </p>
+            <p>
+              Do you forgot the password?{" "}
+              <Button onClick={() => forgotPassword(email)}>
+                <img src={passwordImg} alt="" />
+              </Button>
+            </p>
+          </div>
       </Box>
     </Grid>
+    </div>
   );
 };
 

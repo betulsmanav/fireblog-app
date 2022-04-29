@@ -27,9 +27,10 @@ const Details = () => {
     navigate(`/updateblog/${item.id}`,{state:{item}})
   
   }
+  
   return (
-    <div>
-      <Card sx={{ maxWidth: 345 }} className="cardContainer">
+    <div style={{display:"flex",justifyContent:"center",marginTop:"3rem"}} >
+      <Card  sx={{ maxWidth: 345 }} className="cardContainer">
         <CardMedia
           className="cardImage"
           src={item.imageUrl}
@@ -50,7 +51,7 @@ const Details = () => {
           </Typography>
 
           <Typography variant="h6" sx={{ fontSize: "12px" }}>
-            {/* {details.date}{" "} */}
+            {item.date}{" "}
           </Typography>
 
           <Typography

@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Grid, TextField, Button, Stack, Box } from "@mui/material";
-import {NewContext} from '../contexts/NewContext'
 import { UpdateCard } from "../helpers/NewFunction";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
@@ -11,36 +10,39 @@ const UpdateBlog = () => {
   const location = useLocation();
   const item = location.state.item;
   
-  // console.log(item)
-  // const {handleChange } = useContext(NewContext);
+ 
 
-  const { info, setInfo } = useContext(NewContext)
   const {currentUser}=useContext(AuthContext)
   
   const newValue = { title: item.title,
-    imgUrl: item.imgUrl,
+    imageUrl: item.imageUrl,
     content: item.content,
     date: item.date,
     likes: 0,
     user: currentUser.email,
   }
-  
-  const handleChange =(e)=> {
+  const initialValues = { ...item };
+
+  const [info, setInfo] = useState(initialValues);
+
+  const handleChange = (e) => {
     e.preventDefault();
     const { name, value, defaultValue } = e.target;
     setInfo({ ...newValue, [name]: (value ? value : defaultValue), });
 }
   const handleFormUpdate = (e) => {
     e.preventDefault();
-    UpdateCard(item)
+    UpdateCard(info)
     navigate(`/details/${item.id}`, { state: { item } });
-    setInfo({ ...info, title: "", imgUrl: "", content: "", date: "" });
+    setInfo({ ...info, title: "", imageUrl: "", content: "", date: "" });
+    
     Toastify("update succeeded");
 
   }
   
   return (
-    <Grid container textAlign="center" direction="column" style={{ width: "300px" }}>
+    <div style={{display:"flex",justifyContent:"center",marginTop:"3rem"}}>
+      <Grid container textAlign="center" direction="column" style={{ width: "300px" }}>
       <h2 className="contact-header">────Update Bolg────</h2>
 
       <Box style={{ backgroundColor: "white", padding: "20px" }}>
@@ -90,6 +92,7 @@ const UpdateBlog = () => {
         </form>
       </Box>
     </Grid>
+    </div>
   );
 };
 

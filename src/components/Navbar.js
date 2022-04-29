@@ -82,18 +82,18 @@ const Navbar = () => {
             </Menu>
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: "flex" }}>
+          <Box className="header" sx={{ flexGrow: 1, display: "flex" }}>
             <Typography
               variant="h5"
-              component="h2"
+              component="h1"
               onClick={() => navigate("/")}
             >
-              ──── <span> {"<FireBlogApp/>"}</span>────
+             ──── <span> {"<Betul/>"}</span> Blog ────
             </Typography>
           </Box>
 
           {currentUser ? (
-            <Box className="userInf" sx={{ flexGrow: 1, display: "flex" }}>
+            <Box className="userInf" sx={{ flexGrow: 0, display: "flex" }}>
               <h5>{currentUser?.displayName}</h5>
 
               <Box sx={{ flexGrow: 0, display: "flex" }}>

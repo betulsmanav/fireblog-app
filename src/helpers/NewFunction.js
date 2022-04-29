@@ -71,13 +71,11 @@ export const DeleteCard = (id,navigate) => {
 
 // *blgi--duzeltme
 
-export const UpdateCard = (item) => {
-  
-
+export const UpdateCard = (info) => {
   const db = getDatabase();
   const updates = {};
 
-  updates["NewBlog/" + item.id] = item;
+  updates["NewBlog/" + info.id] = info;
   return update(ref(db),updates)
   
 }
