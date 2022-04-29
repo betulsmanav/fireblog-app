@@ -18,7 +18,7 @@ const Details = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const item = location.state.item;
-  console.log(item);
+  // console.log(item);
  
   const { currentUser } = useContext(AuthContext)
   // console.log(currentUser)

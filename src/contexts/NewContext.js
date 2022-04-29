@@ -17,16 +17,7 @@ const NewContextProvider = ({ children }) => {
   // console.log(currentUser)
   const [info, setInfo] = useState(initialValues);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log(info);
-    if (info.id) {
-      UpdateCard(info)
-    } else {
-      
-      AddNewBlog(info);
-    }
-  };
+  
 
   
       
@@ -45,7 +36,7 @@ const NewContextProvider = ({ children }) => {
 
   return (
     <NewContext.Provider
-      value={{ info, date, setInfo, handleFormSubmit,handleChange }}
+      value={{ info, date, setInfo,handleChange }}
     >
       {children}
     </NewContext.Provider>

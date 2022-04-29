@@ -10,10 +10,7 @@ const UpdateBlog = () => {
   const location = useLocation();
   const item = location.state.item;
   
-  // console.log(item)
-  // const {handleChange } = useContext(NewContext);
-
-  // const { info, setInfo } = useContext(NewContext)
+  
   const {currentUser}=useContext(AuthContext)
   
   const newValue = { title: item.title,
@@ -23,7 +20,7 @@ const UpdateBlog = () => {
     email: currentUser.email,
     
   }
-  console.log(item);
+  // console.log(item);
   const initialValues = { ...item };
 
   const [info, setInfo] = useState(initialValues);
@@ -89,7 +86,8 @@ const UpdateBlog = () => {
               variant="contained"
               type="submit"
               value="Submit"
-            onClick={handleFormUpdate}>
+                onClick={handleFormUpdate}
+              >
               Edit
             </Button>
           </Stack>
