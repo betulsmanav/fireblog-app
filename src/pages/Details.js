@@ -16,16 +16,16 @@ import { AuthContext } from "../contexts/AuthContext";
 
 const Details = () => {
   const navigate = useNavigate();
- 
   const location = useLocation();
   const item = location.state.item;
   console.log(item);
+ 
   const { currentUser } = useContext(AuthContext)
-  console.log(currentUser)
+  // console.log(currentUser)
   
   const handleUpdate = () => {
+    navigate(`/updateblog/${item.id}`,{state:{item}})
   
-    navigate("/updateblog" +item.id ,{state:{item}})
   }
   return (
     <div>

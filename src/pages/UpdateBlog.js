@@ -3,20 +3,38 @@ import { Grid, TextField, Button, Stack, Box } from "@mui/material";
 import {NewContext} from '../contexts/NewContext'
 import { UpdateCard } from "../helpers/NewFunction";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 const UpdateBlog = () => {
-  
-  const {handleChange } = useContext(NewContext);
   const navigate = useNavigate()
-  const {state} = useLocation();                                
-  console.log(state)
+  const location = useLocation();
+  const item = location.state.item;
   
+  // console.log(item)
+  // const {handleChange } = useContext(NewContext);
+
+  const { info, setInfo } = useContext(NewContext)
+  const {currentUser}=useContext(AuthContext)
+  
+  const newValue = { title: item.title,
+    imgUrl: item.imgUrl,
+    content: item.content,
+    date: item.date,
+    likes: 0,
+    user: currentUser.email,
+  }
+  
+  const handleChange =(e)=> {
+    e.preventDefault();
+    const { name, value, defaultValue } = e.target;
+    setInfo({ ...newValue, [name]: (value ? value : defaultValue), });
+}
   const handleFormUpdate = (e) => {
     e.preventDefault();
-    UpdateCard(state.item)
+    UpdateCard(item)
+    navigate(`/details/${item.id}`, { state: { item } });
+    setInfo({ ...info, title: "", imgUrl: "", content: "", date: "" });
 
-
-    navigate("/details", { state:  state.item });
   }
   
   return (
@@ -30,8 +48,9 @@ const UpdateBlog = () => {
               type="text"
               variant="outlined"
               name="title"
-              value={state.item.title}
-              onChange={handleChange}
+              defaultValue={item?.title}
+              onChange={(e)=>handleChange(e)}
+  
               label="Title*"
               placeholder="Title"
               size="small"
@@ -39,8 +58,9 @@ const UpdateBlog = () => {
             <TextField
               variant="outlined"
               name="imageUrl"
-              value={state.item.imageUrl}
-              onChange={handleChange}
+              defaultValue={item?.imageUrl}
+              onChange={(e)=>handleChange(e)}
+
               label="Image URL*"
               placeholder="Image URL"
               size="small"
@@ -49,15 +69,19 @@ const UpdateBlog = () => {
               className="newBlog-input"
               id="outlined-textarea"
               name="content"
-              value={state.item.content}
-              onChange={handleChange}
+              defaultValue={item?.content}
+              onChange={(e)=>handleChange(e)}
               label="Content*"
               placeholder="Content"
               multiline
               rows={7}
             />
 
-            <Button variant="contained" type="submit" value="Submit" >
+            <Button
+              variant="contained"
+              type="submit"
+              value="Submit"
+            onClick={handleFormUpdate}>
               Edit
             </Button>
           </Stack>

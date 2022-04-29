@@ -6,6 +6,7 @@ const NewBlog = () => {
   
   const { info,handleFormSubmit,handleChange} = useContext(NewContext);
   
+  
   return (
     <Grid container textAlign="center" direction="column" style={{ width: "300px" }}>
       <h2 className="contact-header">────New Bolg────</h2>

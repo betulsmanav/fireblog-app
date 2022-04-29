@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { userObserver } from "../helpers/userFunction";
 
 export const AuthContext=createContext()
@@ -16,5 +16,9 @@ const AuthContextProvider = ({children}) => {
         </AuthContext.Provider>
     )
 };
+
+export const useAuthContext = ()=>{
+    return useContext(AuthContext)
+  }
 
 export default AuthContextProvider;

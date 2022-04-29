@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import {AuthContext} from "../contexts/AuthContext"
 import { logOut } from "../helpers/userFunction";
+import "./Navbar.css";
 
 const Navbar = () => {
   const {currentUser}=useContext(AuthContext)
@@ -43,8 +44,8 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar className="navbar" position="static">
+      <Container maxWidth="xl" className="container">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: "flex" }}>
             <IconButton
@@ -89,7 +90,7 @@ const Navbar = () => {
           </Box>
 
           {currentUser ? (
-            <Box sx={{ flexGrow: 1, display: "flex" }}>
+            <Box className="userInf" sx={{ flexGrow: 1, display: "flex" }}>
               <h5>{currentUser?.displayName}</h5>
 
               <Box sx={{ flexGrow: 0, display: "flex" }}>
@@ -114,15 +115,15 @@ const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <Link to="/profile">
+                  <Link className="link" to="/profile">
                     <MenuItem value="profile" onClick={handleCloseUserMenu}>
                       Profile
                     </MenuItem>
                   </Link>
-                  <Link to="/newblog">
+                  <Link className="link" to="/newblog">
                     <MenuItem onClick={handleCloseUserMenu}>New</MenuItem>
                   </Link>
-                  <Link to="/login">
+                  <Link className="link" to="/login">
                     <MenuItem onClick={handleCloseUserMenu}>
                       <Typography textAlign="center" onClick={()=>logOut()}>Logout</Typography>
                     </MenuItem>
@@ -131,11 +132,11 @@ const Navbar = () => {
               </Box>
             </Box>
           ) : (
-            <Box sx={{ flexGrow: 0, display: "flex" }}>
-                <Button color="secondary" variant="outlined" onClick={()=>navigate("/login")} >
+            <Box className="buttons" sx={{ flexGrow: 0, display: "flex" }}>
+                <Button className="button" color="secondary" variant="outlined" onClick={()=>navigate("/login")} >
                 login
               </Button>
-                <Button color="secondary" variant="outlined" onClick={()=>navigate("/register")}>
+                <Button className="button" color="secondary" variant="outlined" onClick={()=>navigate("/register")}>
                 Register
               </Button>
             </Box>

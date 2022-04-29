@@ -15,7 +15,7 @@ const initialValues = {
 const NewContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext)
   const date = new Date().toLocaleDateString();
-  console.log(currentUser)
+  // console.log(currentUser)
   const [info, setInfo] = useState(initialValues);
 
   const handleFormSubmit = (e) => {
@@ -46,7 +46,7 @@ const NewContextProvider = ({ children }) => {
 
   return (
     <NewContext.Provider
-      value={{ info, date, setInfo, handleFormSubmit, handleChange }}
+      value={{ info, date, setInfo, handleFormSubmit,handleChange }}
     >
       {children}
     </NewContext.Provider>
