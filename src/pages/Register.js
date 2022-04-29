@@ -38,31 +38,41 @@ const Login = () => {
             <TextField
               variant="outlined"
               name="username"
+              label="username"
               placeholder="User Name"
               required
               onChange={(e)=>setUserName(e.target.value)}
               
             />
             <TextField
+               margin="normal"
+               required
+               fullWidth
+               id="email"
+               label="Email Address"
+               autoComplete="email"
+               autoFocus
               variant="outlined"
               name="email"
               placeholder="Email"
-              required
               onChange={(e)=>setEmail(e.target.value)}
               
             />
             <TextField
-              variant="outlined"
-              name="password"
-              placeholder="Password"
+              margin="normal"
               required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              placeholder="Password"
               onChange={(e)=>setPassword(e.target.value)}
               
             />
             
             <Button variant="contained" type="submit" value="Submit"
-              // onClick={handleSubmit} 
-              // !kullanirsan type submit olacak ama burada required calismaz dgru kullanimi forma onSubmit vermektir
             >
               register
             </Button>

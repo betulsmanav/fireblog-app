@@ -23,9 +23,7 @@ export const createUser = async (email, password,navigate,displayName) => {
     await updateProfile(auth.currentUser, {
       displayName: displayName
     })
-    
-
-  console.log(userCredential)
+    console.log(userCredential)
   } catch (err) {
     alert(err.message);
   }
@@ -47,7 +45,6 @@ export const signIn = async (email,password,navigate) => {
 
 export const logOut = () => {
   signOut(auth)
-  alert("logged out succesfully")
 }
 
 export const userObserver = (setCurrentUser) => {

@@ -25,9 +25,7 @@ const NewContextProvider = ({ children }) => {
     }
   };
 
-  const editHandler=(id,title,imageUrl,content)=>{
-    setInfo({id,title,imageUrl,content})
-  }
+  
       
           
       
@@ -44,7 +42,7 @@ const NewContextProvider = ({ children }) => {
 
   return (
     <NewContext.Provider
-      value={{ info, date, setInfo,editHandler, handleFormSubmit, handleChange }}
+      value={{ info, date, setInfo, handleFormSubmit, handleChange }}
     >
       {children}
     </NewContext.Provider>

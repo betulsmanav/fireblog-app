@@ -8,6 +8,7 @@ import Profile from '../pages/Profile';
 import Register from '../pages/Register';
 import UpdateBlog from '../pages/UpdateBlog';
 import Navbar from '../components/Navbar'
+import NotFound from '../pages/NotFound';
 
 const AppRouter = () => {
     return (
@@ -21,7 +22,8 @@ const AppRouter = () => {
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/details/:id' element={<Details />} />
                 <Route path='/newblog' element={<NewBlog />} />
-                <Route path='/updateblog' element={<UpdateBlog />} />
+                <Route path='/updateblog/:id' element={<UpdateBlog />} />
+                <Route path='*' element={<NotFound />} />
               
               
                 

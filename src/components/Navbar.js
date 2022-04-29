@@ -1,4 +1,4 @@
-import  React from "react";
+import React, { useContext } from "react";
 // import  {useContext} from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -11,15 +11,18 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import cwLogo from "../assets/cw.jpeg";
-import { Link } from "react-router-dom";
-// import { AuthContext } from "../contexts/AuthContext";
-
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import {AuthContext} from "../contexts/AuthContext"
+import { logOut } from "../helpers/userFunction";
 
 const Navbar = () => {
-  // !const navigate = useNavigate();
-  // !onClickCapture={()=>navigate("/about")}
-
-  // const {currentUser} = useContext(AuthContext);
+  const {currentUser}=useContext(AuthContext)
+  const navigate = useNavigate()
+  
+  
+  // const currentUser = { displayName: "betul sonmez" };
+  // const currentUser = false;
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -37,9 +40,7 @@ const Navbar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-   
   };
-
 
   return (
     <AppBar position="static">
@@ -54,8 +55,7 @@ const Navbar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-                <img style={{ height: "30px" }} src={cwLogo} alt="" />
-              
+              <img style={{ height: "30px" }} src={cwLogo} alt="" />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -75,7 +75,7 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <Link  to="/about">
+              <Link to="/about">
                 <MenuItem onClick={handleCloseUserMenu}>About</MenuItem>
               </Link>
               
@@ -83,52 +83,63 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 1, display: "flex" }}>
-            <Link to="/" underline="none">
-              <Typography variant="h5" component="h2">
+              <Typography variant="h5" component="h2" onClick={()=>navigate("/")}>
                 ──── <span> {"<FireBlogApp/>"}</span>────
               </Typography>
-            </Link>
           </Box>
-              {/* ??????????????????? */}
-          {/* {currentUser ? (<Box sx={{ flexGrow: 1, display: "flex" }}>
-            <p>{currentUser?.displayName}</p>
-            </Box>):(<p></p>)} */}
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src="/broken-image.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <Link to="/profile">
-                <MenuItem value="profile" onClick={handleCloseUserMenu}>Profile</MenuItem>
-              </Link>
-              <Link to="/newblog">
-                <MenuItem onClick={handleCloseUserMenu}>New</MenuItem>
-              </Link>
-              <Link to="/login">
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Logout</Typography>
-                </MenuItem>
-              </Link>
-            </Menu>
-          </Box>
+          {currentUser ? (
+            <Box sx={{ flexGrow: 1, display: "flex" }}>
+              <h5>{currentUser?.displayName}</h5>
+
+              <Box sx={{ flexGrow: 0, display: "flex" }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar src="/broken-image.jpg" />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <Link to="/profile">
+                    <MenuItem value="profile" onClick={handleCloseUserMenu}>
+                      Profile
+                    </MenuItem>
+                  </Link>
+                  <Link to="/newblog">
+                    <MenuItem onClick={handleCloseUserMenu}>New</MenuItem>
+                  </Link>
+                  <Link to="/login">
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" onClick={()=>logOut()}>Logout</Typography>
+                    </MenuItem>
+                  </Link>
+                </Menu>
+              </Box>
+            </Box>
+          ) : (
+            <Box sx={{ flexGrow: 0, display: "flex" }}>
+                <Button color="secondary" variant="outlined" onClick={()=>navigate("/login")} >
+                login
+              </Button>
+                <Button color="secondary" variant="outlined" onClick={()=>navigate("/register")}>
+                Register
+              </Button>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

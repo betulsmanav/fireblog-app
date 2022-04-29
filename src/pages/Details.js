@@ -10,22 +10,25 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import { useLocation, useNavigate } from "react-router-dom";
 import { DeleteCard } from "../helpers/NewFunction";
-import { useContext } from "react";
-import { NewContext } from "../contexts/NewContext";
+// import { useContext } from "react";
+// import { NewContext } from "../contexts/NewContext";
 
 const Details = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const data = location.state.item;
-  const { editHandler } = useContext(NewContext);
-
+  const item = location.state.item;
+  // const { info } = useContext(NewContext)
+  
+  const handleUpdate = () => {
+    navigate("/updateblog",{state:{item}})
+  }
   return (
     <div>
       <Card sx={{ maxWidth: 345 }} className="cardContainer">
         <CardMedia
           className="cardImage"
-          src={data.imageUrl}
-          image={data.imageUrl}
+          src={item.imageUrl}
+          image={item.imageUrl}
           component="img"
           height="140"
           alt="blog image"
@@ -38,7 +41,7 @@ const Details = () => {
             component="div"
             sx={{ cursor: "pointer" }}
           >
-            {data.title}
+            {item.title}
           </Typography>
 
           <Typography variant="h6" sx={{ fontSize: "12px" }}>
@@ -50,7 +53,7 @@ const Details = () => {
             color="text.secondary"
             sx={{ cursor: "pointer", "&:hover": { color: "black" } }}
           >
-            {data.content}
+            {item.content}
           </Typography>
         </CardContent>
 
@@ -60,23 +63,16 @@ const Details = () => {
           <ModeCommentOutlinedIcon sx={{ cursor: "pointer" }} />
           <span> </span>
 
-          <Typography className="email">{data.email}</Typography>
+          <Typography className="email">{item.email}</Typography>
         </CardActions>
         <Button
-          onClick={() =>
-            editHandler(
-              data.id,
-              data.title,
-              data.imageUrl,
-              data.content,
-              navigate
-            )
-          }
+          onClick={() =>handleUpdate(item.id)}
+          
         >
           UPDATE
         </Button>
 
-        <Button onClick={() => DeleteCard(data.id, navigate)}>DELETE</Button>
+        <Button onClick={() => DeleteCard(item.id, navigate)}>DELETE</Button>
       </Card>
     </div>
   );

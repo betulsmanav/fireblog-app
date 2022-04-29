@@ -67,8 +67,8 @@ export const DeleteCard = (id,navigate) => {
 
 // *blgi--duzeltme
 
-export const UpdateCard = (info, navigate) => {
-  navigate("/updateblog");
+export const UpdateCard = (info) => {
+  
 
   const db = getDatabase();
   const updates = {};
