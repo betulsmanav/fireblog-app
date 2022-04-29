@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { AddNewBlog, UpdateCard } from "../helpers/NewFunction";
 import { AuthContext } from "./AuthContext";
 
 export const NewContext = createContext();
