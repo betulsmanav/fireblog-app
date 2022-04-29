@@ -11,6 +11,8 @@ import {
   update,
 } from "firebase/database";
 import { useEffect, useState } from "react";
+import {Toastify} from "./toastNotify";
+
 
 // *bilgi ekleme
 export const AddNewBlog = (info) => {
@@ -63,6 +65,8 @@ export const DeleteCard = (id,navigate) => {
 
   remove(ref(db, "NewBlog/" + id));
   navigate("/")
+  Toastify("deletion succeeded");
+  
 };
 
 // *blgi--duzeltme

@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-// import  {useContext} from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,18 +9,17 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import cwLogo from "../assets/cw.jpeg";
+import homeIcon from "../assets/home.png";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import {AuthContext} from "../contexts/AuthContext"
+import { AuthContext } from "../contexts/AuthContext";
 import { logOut } from "../helpers/userFunction";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const {currentUser}=useContext(AuthContext)
-  const navigate = useNavigate()
-  
-  
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   // const currentUser = { displayName: "betul sonmez" };
   // const currentUser = false;
 
@@ -56,7 +54,9 @@ const Navbar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <img style={{ height: "30px" }} src={cwLogo} alt="" />
+              <Link to={"/"}>
+                <img src={homeIcon} alt="home-icon" />
+              </Link>
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -79,14 +79,17 @@ const Navbar = () => {
               <Link to="/about">
                 <MenuItem onClick={handleCloseUserMenu}>About</MenuItem>
               </Link>
-              
             </Menu>
           </Box>
 
           <Box sx={{ flexGrow: 1, display: "flex" }}>
-              <Typography variant="h5" component="h2" onClick={()=>navigate("/")}>
-                ──── <span> {"<FireBlogApp/>"}</span>────
-              </Typography>
+            <Typography
+              variant="h5"
+              component="h2"
+              onClick={() => navigate("/")}
+            >
+              ──── <span> {"<FireBlogApp/>"}</span>────
+            </Typography>
           </Box>
 
           {currentUser ? (
@@ -125,7 +128,9 @@ const Navbar = () => {
                   </Link>
                   <Link className="link" to="/login">
                     <MenuItem onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center" onClick={()=>logOut()}>Logout</Typography>
+                      <Typography textAlign="center" onClick={() => logOut()}>
+                        Logout
+                      </Typography>
                     </MenuItem>
                   </Link>
                 </Menu>
@@ -133,10 +138,20 @@ const Navbar = () => {
             </Box>
           ) : (
             <Box className="buttons" sx={{ flexGrow: 0, display: "flex" }}>
-                <Button className="button" color="secondary" variant="outlined" onClick={()=>navigate("/login")} >
+              <Button
+                className="button"
+                color="secondary"
+                variant="outlined"
+                onClick={() => navigate("/login")}
+              >
                 login
               </Button>
-                <Button className="button" color="secondary" variant="outlined" onClick={()=>navigate("/register")}>
+              <Button
+                className="button"
+                color="secondary"
+                variant="outlined"
+                onClick={() => navigate("/register")}
+              >
                 Register
               </Button>
             </Box>

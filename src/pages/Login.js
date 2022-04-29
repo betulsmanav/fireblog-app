@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Grid, TextField, Button, Stack, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUpProvider } from "../helpers/userFunction";
+import { ToastifyInfo } from "../helpers/toastNotify";
 
-const Login = ({ handleFormSubmit }) => {
+const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate=useNavigate()
@@ -13,12 +14,14 @@ const Login = ({ handleFormSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     signIn(email,password,navigate)
+    ToastifyInfo("login successfully")
 
     console.log( email, password);
   };
 
   const handleProviderLogin = () => {
     signUpProvider(navigate);
+    ToastifyInfo("login successfully")
     
   }
 
@@ -39,9 +42,12 @@ const Login = ({ handleFormSubmit }) => {
             />
             <TextField
               variant="outlined"
+              type="password"
+              margin="normal"
+              required
+              fullWidth
               name="password"
               placeholder="Password"
-              required
               onChange={(e) => setPassword(e.target.value)}
             />
 

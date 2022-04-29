@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import { createUser } from "../helpers/userFunction";
 import {useNavigate } from "react-router-dom";
+import {  signUpProvider } from "../helpers/userFunction";
+
 
 const Login = () => {
   const [userName, setUserName] = useState();
@@ -20,6 +22,11 @@ const Login = () => {
     e.preventDefault();
     createUser(email,password,navigate,displayName);
     console.log(userName, email, password);
+  }
+
+  const handleProviderLogin = () => {
+    signUpProvider(navigate);
+    
   }
 
 
@@ -75,6 +82,9 @@ const Login = () => {
             <Button variant="contained" type="submit" value="Submit"
             >
               register
+            </Button>
+            <Button onClick={handleProviderLogin} variant="outlined" type="submit" value="Submit">
+              Continue with google
             </Button>
             
           </Stack>

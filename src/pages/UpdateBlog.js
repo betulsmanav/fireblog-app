@@ -4,6 +4,7 @@ import {NewContext} from '../contexts/NewContext'
 import { UpdateCard } from "../helpers/NewFunction";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import {Toastify} from "../helpers/toastNotify";
 
 const UpdateBlog = () => {
   const navigate = useNavigate()
@@ -34,6 +35,7 @@ const UpdateBlog = () => {
     UpdateCard(item)
     navigate(`/details/${item.id}`, { state: { item } });
     setInfo({ ...info, title: "", imgUrl: "", content: "", date: "" });
+    Toastify("update succeeded");
 
   }
   

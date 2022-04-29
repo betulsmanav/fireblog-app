@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 
 import firebase from "./firebase";
+import { ToastifyInfo} from "./toastNotify";
 
 // *Authentication
 const auth = getAuth(firebase);
@@ -45,6 +46,8 @@ export const signIn = async (email,password,navigate) => {
 
 export const logOut = () => {
   signOut(auth)
+  ToastifyInfo("logged out successfully")
+
 }
 
 export const userObserver = (setCurrentUser) => {
