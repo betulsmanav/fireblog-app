@@ -8,19 +8,24 @@ import {
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 import { DeleteCard } from "../helpers/NewFunction";
-// import { useContext } from "react";
-// import { NewContext } from "../contexts/NewContext";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+
 
 const Details = () => {
   const navigate = useNavigate();
+ 
   const location = useLocation();
   const item = location.state.item;
-  // const { info } = useContext(NewContext)
+  console.log(item);
+  const { currentUser } = useContext(AuthContext)
+  console.log(currentUser)
   
   const handleUpdate = () => {
-    navigate("/updateblog",{state:{item}})
+  
+    navigate("/updateblog" +item.id ,{state:{item}})
   }
   return (
     <div>
@@ -65,14 +70,19 @@ const Details = () => {
 
           <Typography className="email">{item.email}</Typography>
         </CardActions>
-        <Button
-          onClick={() =>handleUpdate(item.id)}
-          
-        >
-          UPDATE
-        </Button>
-
-        <Button onClick={() => DeleteCard(item.id, navigate)}>DELETE</Button>
+        {(currentUser?.email === item?.email) ? (
+        <div>
+            
+          <Button
+            onClick={() =>handleUpdate(item.id)}
+            
+          >
+            UPDATE
+          </Button>
+  
+          <Button onClick={() => DeleteCard(item.id, navigate)}>DELETE</Button>
+        </div>): null}
+        
       </Card>
     </div>
   );

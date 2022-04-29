@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { AddNewBlog, UpdateCard } from "../helpers/NewFunction";
+import { AuthContext } from "./AuthContext";
 
 export const NewContext = createContext();
 
@@ -8,10 +9,13 @@ const initialValues = {
   imageUrl: " ",
   content: " ",
   date: "",
+  email:" "
 };
 
 const NewContextProvider = ({ children }) => {
+  const { currentUser } = useContext(AuthContext)
   const date = new Date().toLocaleDateString();
+  console.log(currentUser)
   const [info, setInfo] = useState(initialValues);
 
   const handleFormSubmit = (e) => {
@@ -32,7 +36,7 @@ const NewContextProvider = ({ children }) => {
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    setInfo({ ...info, [name]: value, date });
+    setInfo({ ...info, [name]: value, date ,email:currentUser.email});
 
     // console.log(name, value);
     // console.log(info)

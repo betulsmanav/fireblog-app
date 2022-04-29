@@ -2,16 +2,21 @@ import React, { useContext } from "react";
 import { Grid, TextField, Button, Stack, Box } from "@mui/material";
 import {NewContext} from '../contexts/NewContext'
 import { UpdateCard } from "../helpers/NewFunction";
-import { Navigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const UpdateBlog = () => {
   
-  const { info, handleChange } = useContext(NewContext);
+  const {handleChange } = useContext(NewContext);
+  const navigate = useNavigate()
+  const {state} = useLocation();                                
+  console.log(state)
+  
   const handleFormUpdate = (e) => {
     e.preventDefault();
-    UpdateCard(info)
-    const item = info
-    Navigate("/details", { state: { item } });
+    UpdateCard(state.item)
+
+
+    navigate("/details", { state:  state.item });
   }
   
   return (
@@ -25,7 +30,7 @@ const UpdateBlog = () => {
               type="text"
               variant="outlined"
               name="title"
-              value={info.title}
+              value={state.item.title}
               onChange={handleChange}
               label="Title*"
               placeholder="Title"
@@ -34,7 +39,7 @@ const UpdateBlog = () => {
             <TextField
               variant="outlined"
               name="imageUrl"
-              value={info.imageUrl}
+              value={state.item.imageUrl}
               onChange={handleChange}
               label="Image URL*"
               placeholder="Image URL"
@@ -44,7 +49,7 @@ const UpdateBlog = () => {
               className="newBlog-input"
               id="outlined-textarea"
               name="content"
-              value={info.content}
+              value={state.item.content}
               onChange={handleChange}
               label="Content*"
               placeholder="Content"
@@ -52,7 +57,7 @@ const UpdateBlog = () => {
               rows={7}
             />
 
-            <Button variant="contained" type="submit" value="Submit">
+            <Button variant="contained" type="submit" value="Submit" >
               Edit
             </Button>
           </Stack>

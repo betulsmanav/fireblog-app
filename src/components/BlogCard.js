@@ -72,7 +72,7 @@ function BlogCard() {
               <ModeCommentOutlinedIcon sx={{ cursor: "pointer" }} />
               <span> </span>
 
-              <Typography className="email">{item?.user}</Typography>
+              <Typography className="email">{item?.email}</Typography>
             </CardActions>
             
           </Card>
