@@ -11,7 +11,6 @@ const initialValues = {
   date: "",
   email:" "
 };
-
 const NewContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext)
   const date = new Date().toLocaleDateString();

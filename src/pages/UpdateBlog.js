@@ -10,17 +10,20 @@ const UpdateBlog = () => {
   const location = useLocation();
   const item = location.state.item;
   
- 
+  // console.log(item)
+  // const {handleChange } = useContext(NewContext);
 
+  // const { info, setInfo } = useContext(NewContext)
   const {currentUser}=useContext(AuthContext)
   
   const newValue = { title: item.title,
     imageUrl: item.imageUrl,
     content: item.content,
     date: item.date,
-    likes: 0,
-    user: currentUser.email,
+    email: currentUser.email,
+    
   }
+  console.log(item);
   const initialValues = { ...item };
 
   const [info, setInfo] = useState(initialValues);
@@ -28,15 +31,16 @@ const UpdateBlog = () => {
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value, defaultValue } = e.target;
-    setInfo({ ...newValue, [name]: (value ? value : defaultValue), });
-}
+    // setInfo({ ...newValue, [name]: (value ? value : defaultValue), });
+    setInfo({ ...newValue,  [name]: (value ? value : defaultValue),email:item?.email ,id:item?.id });
+  }
   const handleFormUpdate = (e) => {
     e.preventDefault();
     UpdateCard(info)
-    navigate(`/details/${item.id}`, { state: { item } });
+    navigate("/", { state: { item } });
     setInfo({ ...info, title: "", imageUrl: "", content: "", date: "" });
-    
     Toastify("update succeeded");
+    
 
   }
   

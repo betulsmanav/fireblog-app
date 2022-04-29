@@ -46,7 +46,7 @@ const NewBlog = () => {
               rows={7}
             />
 
-            <Button variant="contained" type="submit" value="Submit">
+            <Button  variant="contained" type="submit" value="Submit">
               add
             </Button>
           </Stack>
